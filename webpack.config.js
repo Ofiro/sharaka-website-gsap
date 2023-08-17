@@ -1,13 +1,14 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin'); // 1. Require the plugin
 
 module.exports = {
-  mode: 'production', // set mode to production
+  mode: 'production',
   entry: './src/init.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'), // Output to a "dist" directory
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
   resolve: {
@@ -30,7 +31,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          MiniCssExtractPlugin.loader, // Use MiniCssExtractPlugin's loader
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'sass-loader'
         ]
@@ -38,7 +39,7 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          MiniCssExtractPlugin.loader, // Use MiniCssExtractPlugin's loader
+          MiniCssExtractPlugin.loader,
           'css-loader'
         ]
       }
@@ -46,12 +47,13 @@ module.exports = {
   },
   optimization: {
     minimizer: [
-      new CssMinimizerPlugin(), // Minimize the extracted CSS
+      new TerserPlugin(),   // 2. Add TerserPlugin to minimizer
+      new CssMinimizerPlugin(),
     ],
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css', // Output extracted CSS to files
+      filename: '[name].css',
       chunkFilename: '[id].css',
     })
   ]
