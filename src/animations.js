@@ -210,7 +210,7 @@ if (elementsExist('.form_input_wrap')) {
               opacity: 1,
               scrollTrigger: {
                   ...getScrollTriggerConfig(element),
-                  scrub: true,
+                  scrub: false,
                   toggleActions: "play none none none",
               },
           })
