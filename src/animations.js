@@ -227,6 +227,7 @@ if (elementsExist('.form_input_wrap')) {
       smooth: 2,
       effects: true,
       smoothTouch: 0.1,
+      normalizeScroll: true
     });
   }
 }
