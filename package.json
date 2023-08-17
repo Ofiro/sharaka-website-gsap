@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@splidejs/splide": "^4.1.4",
+    "css-minimizer-webpack-plugin": "^5.0.1",
     "external-svg-loader": "^1.6.9"
   },
   "devDependencies": {

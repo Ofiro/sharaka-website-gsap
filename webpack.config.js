@@ -1,22 +1,14 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production', // set mode to production
   entry: './src/init.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname),
+    path: path.resolve(__dirname, 'dist'), // Output to a "dist" directory
     publicPath: '/'
-  },
-  devServer: {
-    static: path.join(__dirname, '.'),
-    compress: true,
-    port: 8080,
-    hot: true,
-    devMiddleware: {
-      writeToDisk: true
-    }
   },
   resolve: {
     alias: {
@@ -38,7 +30,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader, // Use MiniCssExtractPlugin's loader
           'css-loader',
           'sass-loader'
         ]
@@ -46,13 +38,21 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader, // Use MiniCssExtractPlugin's loader
           'css-loader'
         ]
       }
     ]
   },
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin(), // Minimize the extracted CSS
+    ],
+  },
   plugins: [
-    new MiniCssExtractPlugin()
+    new MiniCssExtractPlugin({
+      filename: '[name].css', // Output extracted CSS to files
+      chunkFilename: '[id].css',
+    })
   ]
 };
