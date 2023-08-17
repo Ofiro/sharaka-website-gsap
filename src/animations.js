@@ -192,8 +192,8 @@ if (elementsExist('.button')) {
               clipPath: "inset(0 0% 0 0)",
               scrollTrigger: {
                   ...getScrollTriggerConfig(element),
-                  scrub: true,
-                  toggleActions: "play none none none",
+                  scrub: false,
+                  toggleActions: "play none none reverse",
               },
           })
       );
