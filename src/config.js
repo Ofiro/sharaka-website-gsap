@@ -31,7 +31,7 @@ function checkElementExistence(element) {
 }
 
 function checkLibrariesAvailability() {
-  return "gsap" in window && "ScrollTrigger" in window;
+  return "gsap" in window && "ScrollTrigger" in window && "SplitText" in window;
 }
 
 function getDataAttribute(element, attributeName) {
