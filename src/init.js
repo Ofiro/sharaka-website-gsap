@@ -6,6 +6,7 @@ import SplitText from 'gsap/SplitText.min.js';
 import ScrollTrigger from 'gsap/ScrollTrigger.min.js';
 import ScrollSmoother from 'gsap/ScrollSmoother.min.js';
 import "external-svg-loader";
+
 // Import custom styles
 import './style.scss';
 
@@ -23,16 +24,9 @@ import { applyHoverEffectToSplideWork, applyProjectCardHoverEffect, applyRegionC
 // Register GSAP Plugins
 gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
 
-// Check if GSAP libraries are available
+// Initialization
 if (checkLibrariesAvailability()) {
   initializeAnimations();
-} else {
-  let checkGSAPInterval = setInterval(() => {
-    if (window.gsap) {
-      clearInterval(checkGSAPInterval);
-      initializeAnimations();
-    }
-  }, 100);
 }
 
 const isHomePage = window.location.pathname === '/';

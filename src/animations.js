@@ -16,7 +16,7 @@ function initializeAnimations() {
 
   // Register GSAP Plugins
   gsap.registerPlugin(ScrollTrigger, SplitText, ScrollSmoother);
-
+  console.log("Is SplitText defined?", !!SplitText);
   // Navbar Animation
   const $navbar = $("#navbar");
   if ($navbar.length) {

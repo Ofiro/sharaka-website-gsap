@@ -31,8 +31,21 @@ function checkElementExistence(element) {
 }
 
 function checkLibrariesAvailability() {
+  if (!("gsap" in window)) {
+    console.log("GSAP is not available");
+  }
+
+  if (!("ScrollTrigger" in window)) {
+    console.log("ScrollTrigger is not available");
+  }
+
+  if (!("SplitText" in window)) {
+    console.log("SplitText is not available");
+  }
+
   return "gsap" in window && "ScrollTrigger" in window && "SplitText" in window;
 }
+
 
 function getDataAttribute(element, attributeName) {
   return (
