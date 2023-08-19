@@ -2,7 +2,8 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer"); // Import BundleAnalyzerPlugin
+// Import BundleAnalyzerPlugin, keep it for future use but don't use it for every production build.
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer"); 
 
 module.exports = {
   mode: "production",
@@ -10,7 +11,7 @@ module.exports = {
   output: {
     filename: "[name].js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/",
+    publicPath: "https://sharaka.makevision.agency/", // Updated publicPath
   },
   module: {
     rules: [
@@ -51,6 +52,7 @@ module.exports = {
       filename: "[name].css",
       chunkFilename: "[id].css",
     }),
-    new BundleAnalyzerPlugin(), // Add BundleAnalyzerPlugin
+    // Commenting out BundleAnalyzerPlugin. Uncomment when you need insights into your bundle.
+    // new BundleAnalyzerPlugin(), 
   ],
 };

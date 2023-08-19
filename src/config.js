@@ -1,3 +1,7 @@
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+
 export const COMMON_OPTIONS = {
   focus: 0,
   type: "loop",
@@ -91,20 +95,17 @@ function checkElementExistence(element) {
 }
 
 function checkLibrariesAvailability() {
-  if (!("gsap" in window)) {
-    console.log("GSAP is not available");
-  }
+    const gsapAvailable = gsap ? true : false;
+    const scrollTriggerAvailable = ScrollTrigger ? true : false;
+    const splitTextAvailable = SplitText ? true : false;
 
-  if (!("ScrollTrigger" in window)) {
-    console.log("ScrollTrigger is not available");
-  }
+    if (!gsapAvailable) console.log("GSAP is not available");
+    if (!scrollTriggerAvailable) console.log("ScrollTrigger is not available");
+    if (!splitTextAvailable) console.log("SplitText is not available");
 
-  if (!("SplitText" in window)) {
-    console.log("SplitText is not available");
-  }
-
-  return "gsap" in window && "ScrollTrigger" in window && "SplitText" in window;
+    return gsapAvailable && scrollTriggerAvailable && splitTextAvailable;
 }
+
 
 function getDataAttribute(element, attributeName) {
   return (
