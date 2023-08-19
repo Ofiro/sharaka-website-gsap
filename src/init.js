@@ -7,10 +7,16 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { SplitText } from "gsap/SplitText";
-gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
+  
+window.gsap = gsap;
+window.ScrollTrigger = ScrollTrigger;
 window.SplitText = SplitText;
-
+window.ScrollSmoother = ScrollSmoother;
+// Listener
 document.addEventListener("DOMContentLoaded", function() {
+  gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
+
+  
     if (checkLibrariesAvailability()) {
         initializeAnimations();
     }
@@ -51,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (pageRequiresSVG) {
         import('./svgHandler.js').then(({ createSVGElements }) => {
             createSVGElements();
+            console.log("SVG elements created");
         });
     }
 
