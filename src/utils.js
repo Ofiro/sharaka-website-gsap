@@ -56,3 +56,27 @@ export function elementsExist(selectors) {
   }
   return !!document.querySelector(selectors);
 }
+export function getZoomTransform(bounds, containerWidth, containerHeight) {
+  const dx = bounds[1][0] - bounds[0][0];
+  const dy = bounds[1][1] - bounds[0][1];
+  const x = (bounds[0][0] + bounds[1][0]) / 2;
+  const y = (bounds[0][1] + bounds[1][1]) / 2;
+  const scale = Math.max(1, Math.min(8, 0.9 / Math.max(dx / containerWidth, dy / containerHeight)));
+  const translate = [containerWidth / 2 - scale * x, containerHeight / 2 - scale * y];
+  
+  return { scale, translate };
+}
+export function displayMakevisionBanner() {
+  console.log(`
+    __  __       _              _     _             
+   |  \/  |     | |            (_)   (_)            
+   | \  / | __ _| | _______   ___ ___ _  ___  _ __  
+   | |\/| |/ _\` | |/ / _ \\ \\ / / / __| |/ _ \\| '_ \\ 
+   | |  | | (_| |   <  __/\\ V /| \\__ \\ | (_) | | | |
+   |_|  |_|\__,_|_|\\_\\___| \\_/ |_|___/_|\\___/|_| |_|
+                                                    
+                                                    
+  This was website was built with love by Makevision
+  info@makevision.agency
+  `);
+}

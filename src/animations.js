@@ -193,7 +193,7 @@ if (elementsExist('.button')) {
               scrollTrigger: {
                   ...getScrollTriggerConfig(element),
                   scrub: false,
-                  toggleActions: "play none none reverse",
+                  toggleActions: "play none none none",
               },
           })
       );

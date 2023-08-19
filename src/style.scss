@@ -1,62 +1,99 @@
+// Variables
+$main-color: #1a2f80;
+$transition-duration: 0.3s;
+$delay-increment: 0.1s;
 
-[animate-section-left] {
-  clip-path: inset(0 100% 0 0); /* This hides the entire element initially */
-  transition: clip-path 1s; /* Smooth transition, adjust duration as needed */
-  opacity: 0;
+// Base Styles
+.lineParent,
+.wordParent {
+  overflow: hidden;
 }
+
+[animate-section-left],
+.button,
+#arabicSVG path {
+  clip-path: inset(0 100% 0 0); // Hides the element
+}
+
+[animate-section-left],
 [animate-fade-in] {
   opacity: 0;
 }
 
-.lineParent {
-  overflow: hidden;
+[animate-section-left] {
+  transition: clip-path 1s;
 }
-.wordParent {
-  overflow: hidden;
-}
-.button {
-  clip-path: inset(0 100% 0 0);  /* Starts fully masked (from the right) */
-}
-#arabicSVG path {
-  fill: currentColor;
-  clip-path: inset(0 100% 0 0); /* Hides the SVG initially */
-}
-/* Splide Styles */
+
 .splide__track {
   overflow: visible;
 }
 
-/* Project Card Styles */
 .project-card-title {
   max-width: calc(100% - 4rem);
 }
 
-/* Slide Blur Styles */
 .slide-blur {
   filter: blur(3px);
-  transition: filter 0.3s ease;
+  transition: filter $transition-duration ease;
 }
 
-/* Card Overlay Styles */
-.card-overlay-blue {
-  .card-overlay-row {
-    $delay-increment: 0.1s;
-    @for $i from 1 through 5 {
-      &:nth-child(#{$i}) {
-        transition-delay: $i * $delay-increment;
+.news_item:hover .news_featured-image {
+  transform: scale(1.1);
+}
+
+.team_member_item {
+  width: calc(100% - 1.875rem);
+}
+
+.world_map_modded {
+  fill: currentColor;
+
+  path {
+    stroke: white;
+    stroke-width: 0.015rem;
+  }
+
+  .europe,
+  .Israel,
+  .Pakistan,
+  .Morocco,
+  .Bahrain,
+  .United-States,
+  .United-Arab-Emirates {
+    fill: $main-color;
+    opacity: 50%;
+  }
+
+  .active-region {
+    opacity: 100%;
+  }
+}
+
+.news_item_wrapper {
+  @media (min-width: 991px) {
+    &:not(.ismediapage) {
+      &:nth-child(1) {
+        grid-column: span 2;
+        grid-row: span 2;
+      }
+    }
+    
+    &.ismediapage {
+      &:nth-child(3n) {
+        grid-column: span 2;
+        grid-row: span 2;
       }
     }
   }
 }
 
-/* News Item Hover Styles */
-.news_item:hover {
-  .news_featured-image {
-    transform: scale(1.1);
+// Nested Styles
+.card-overlay-blue .card-overlay-row {
+  @for $i from 1 through 5 {
+    &:nth-child(#{$i}) {
+      transition-delay: $i * $delay-increment;
+    }
   }
-}
-.team_member_item {
-  width: calc(100% - 1.875rem);
 }
 
 .team_member_circle,
@@ -81,42 +118,20 @@
     }
   }
 }
+
 .region_card_map_svg {
   path {
-    stroke: #1a2f80;
+    stroke: $main-color;
     stroke-width: 1px;
-    transition: all 0.3s ease-in-out;
+    transition: all $transition-duration ease-in-out;
   }
 
   &.ishovered {
     color: red;
+
     path {
       stroke: #fff;
-      color: #1a2f80;
+      color: $main-color;
     }
-  }
-}
-
-.world_map_modded {
-  fill: currentColor;
-
-  path {
-    stroke: white;
-    stroke-width: 0.015rem;
-  }
-
-  .europe,
-  .Israel,
-  .Pakistan,
-  .Morocco,
-  .Bahrain,
-  .United-States,
-  .United-Arab-Emirates {
-    fill: #1a2f80;
-    opacity: 50%;
-  }
-
-  .active-region {
-    opacity: 100%;
   }
 }

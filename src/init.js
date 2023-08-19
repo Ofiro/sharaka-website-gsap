@@ -20,10 +20,15 @@ import { initializeGallery, initializeOurWork } from './splideInitializers.js';
 import { createSVGElements } from './svgHandler';
 import { handleTeamBioPopup } from './teamBioHandler';
 import { applyHoverEffectToSplideWork, applyProjectCardHoverEffect, applyRegionCardHoverEffects, applyRegionItemHoverEffects } from './effects';
+import { displayMakevisionBanner } from './utils';
+import { renderGitHubGlobe, renderWorldMap } from './worldMap';
+import { renderGlobe } from './globe';
+document.addEventListener("DOMContentLoaded", function() {
 
 // Register GSAP Plugins
 gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
-
+console.log("Direct SplitText check:", SplitText);
+window.SplitText = SplitText;
 // Initialization
 if (checkLibrariesAvailability()) {
   initializeAnimations();
@@ -34,7 +39,7 @@ if (isHomePage) {
   initializeGallery();
   initializeOurWork();
 }
-
+displayMakevisionBanner();
 // Apply hover effect to Splide work on all pages
 applyHoverEffectToSplideWork();
 createSVGElements();
@@ -42,3 +47,5 @@ handleTeamBioPopup();
 applyProjectCardHoverEffect();
 applyRegionCardHoverEffects();
 applyRegionItemHoverEffects();
+renderGlobe();
+});
