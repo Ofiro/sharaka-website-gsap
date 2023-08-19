@@ -26,23 +26,10 @@
  */
 
 /*!
- * Splide.js
- * Version  : 4.1.4
- * License  : MIT
- * Copyright: 2022 Naotoshi Fujita
- */
-
-/*!
  * SplitText 3.12.2
  * https://greensock.com
  * 
  * @license Copyright 2023, GreenSock. All rights reserved.
  * This plugin is a membership benefit of Club GreenSock and is only authorized for use in sites/apps/products developed by individuals/companies with an active Club GreenSock membership. See https://greensock.com/club
  * @author: Jack Doyle, jack@greensock.com
- */
-
-/**
- * @license
- * Copyright 2010-2023 Three.js Authors
- * SPDX-License-Identifier: MIT
  */

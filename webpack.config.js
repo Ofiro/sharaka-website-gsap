@@ -1,20 +1,16 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin'); // 1. Require the plugin
+const path = require("path");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer"); // Import BundleAnalyzerPlugin
 
 module.exports = {
-  mode: 'production',
-  entry: './src/init.js',
+  mode: "production",
+  entry: "./src/init.js",
   output: {
-    filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
-  },
-  resolve: {
-    alias: {
-      gsap: path.resolve(__dirname, 'gsap/')
-    }
+    filename: "[name].js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
   },
   module: {
     rules: [
@@ -22,39 +18,39 @@ module.exports = {
         test: /\.js$/,
         exclude: /(node_modules)/,
         use: {
-          loader: 'babel-loader',
+          loader: "babel-loader",
           options: {
-            presets: ['@babel/preset-env']
-          }
-        }
+            presets: ["@babel/preset-env"],
+          },
+        },
       },
       {
         test: /\.scss$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader',
-          'sass-loader'
-        ]
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          'css-loader'
-        ]
-      }
-    ]
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
+      },
+    ],
   },
   optimization: {
-    minimizer: [
-      new TerserPlugin(),   // 2. Add TerserPlugin to minimizer
-      new CssMinimizerPlugin(),
-    ],
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/](gsap|splide)[\\/]/,
+          name: "vendor",
+          chunks: "all",
+        },
+      },
+    },
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name].css',
-      chunkFilename: '[id].css',
-    })
-  ]
+      filename: "[name].css",
+      chunkFilename: "[id].css",
+    }),
+    new BundleAnalyzerPlugin(), // Add BundleAnalyzerPlugin
+  ],
 };

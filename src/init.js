@@ -1,51 +1,75 @@
-// init.js
 
-// Import core GSAP library and plugins
-import gsap from 'gsap/gsap.min.js';
-import SplitText from 'gsap/SplitText.min.js';
-import ScrollTrigger from 'gsap/ScrollTrigger.min.js';
-import ScrollSmoother from 'gsap/ScrollSmoother.min.js';
 import "external-svg-loader";
-
-// Import custom styles
 import './style.scss';
-
-// Import Splide styles
-import '@splidejs/splide/dist/css/splide.min.css';
-
-// Import utility functions and initializers
 import { checkLibrariesAvailability } from './config.js';
 import { initializeAnimations } from './animations.js';
-import { initializeGallery, initializeOurWork } from './splideInitializers.js';
-import { createSVGElements } from './svgHandler';
-import { handleTeamBioPopup } from './teamBioHandler';
-import { applyHoverEffectToSplideWork, applyProjectCardHoverEffect, applyRegionCardHoverEffects, applyRegionItemHoverEffects } from './effects';
-import { displayMakevisionBanner } from './utils';
-import { renderGitHubGlobe, renderWorldMap } from './worldMap';
-import { renderGlobe } from './globe';
-document.addEventListener("DOMContentLoaded", function() {
-
-// Register GSAP Plugins
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollSmoother } from "gsap/ScrollSmoother";
+import { SplitText } from "gsap/SplitText";
 gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
-console.log("Direct SplitText check:", SplitText);
 window.SplitText = SplitText;
-// Initialization
-if (checkLibrariesAvailability()) {
-  initializeAnimations();
-}
 
-const isHomePage = window.location.pathname === '/';
-if (isHomePage) {
-  initializeGallery();
-  initializeOurWork();
-}
-displayMakevisionBanner();
-// Apply hover effect to Splide work on all pages
-applyHoverEffectToSplideWork();
-createSVGElements();
-handleTeamBioPopup();
-applyProjectCardHoverEffect();
-applyRegionCardHoverEffects();
-applyRegionItemHoverEffects();
-renderGlobe();
+document.addEventListener("DOMContentLoaded", function() {
+    if (checkLibrariesAvailability()) {
+        initializeAnimations();
+    }
+
+    const bodyData = document.body.getAttribute('data-requires') || "";
+
+    const pageRequiresHoverEffects = bodyData.includes("hover-effects");
+    const pageRequiresSVG = bodyData.includes("svg");
+    const pageRequiresTeamBio = bodyData.includes("team-bio");
+    const pageRequiresWorldMap = bodyData.includes("world-map");
+    const pageRequiresGlobe = bodyData.includes("globe");
+
+    // For pages requiring Splide Gallery and Our Work initializers
+    if (bodyData.includes("splide")) {
+        import('@splidejs/splide/dist/css/splide.min.css').then(() => {
+            import('./splideInitializers.js').then(({ initializeGallery, initializeOurWork }) => {
+                initializeGallery();
+                initializeOurWork();
+            });
+        });
+    }
+
+    // Load resources based on the requirements specified in body's data attribute
+    if (pageRequiresHoverEffects) {
+        import('./effects.js').then(({ 
+            applyHoverEffectToSplideWork,
+            applyProjectCardHoverEffect,
+            applyRegionCardHoverEffects,
+            applyRegionItemHoverEffects 
+        }) => {
+            applyHoverEffectToSplideWork();
+            applyProjectCardHoverEffect();
+            applyRegionCardHoverEffects();
+            applyRegionItemHoverEffects();
+        });
+    }
+
+    if (pageRequiresSVG) {
+        import('./svgHandler.js').then(({ createSVGElements }) => {
+            createSVGElements();
+        });
+    }
+
+    if (pageRequiresTeamBio) {
+        import('./teamBioHandler.js').then(({ handleTeamBioPopup }) => {
+            handleTeamBioPopup();
+        });
+    }
+
+    if (pageRequiresWorldMap) {
+        import('./worldMap.js').then(({ renderGitHubGlobe, renderWorldMap }) => {
+            renderGitHubGlobe();
+            renderWorldMap();
+        });
+    }
+
+    if (pageRequiresGlobe) {
+        import('./globe.js').then(({ renderGlobe }) => {
+            renderGlobe();
+        });
+    }
 });
