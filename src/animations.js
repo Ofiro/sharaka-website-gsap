@@ -14,9 +14,6 @@ import {
 function initializeAnimations() {
   if (!checkLibrariesAvailability()) return;
 
-  // Register GSAP Plugins
-  gsap.registerPlugin(ScrollTrigger, SplitText, ScrollSmoother);
-  console.log("Is SplitText defined?", !!SplitText);
   // Navbar Animation
   const $navbar = $("#navbar");
   if ($navbar.length) {
@@ -47,16 +44,6 @@ function initializeAnimations() {
           scrub: true,
           toggleActions: "play none none reverse",
         },
-      })
-    );
-  }
-
-  // SVG Animation
-  if (elementsExist('#arabicSVG path')) {
-    gsap.to(
-      "#arabicSVG path",
-      getAnimationProperties({
-        clipPath: "inset(0 0% 0 0)",
       })
     );
   }
@@ -164,24 +151,60 @@ function initializeAnimations() {
       );
   }
 
-  const randomAnimationSelectors = '.news_grid .news_item_wrapper, .team_members-wrapper .team_member_item, [random-animation]';
-  if (elementsExist(randomAnimationSelectors)) {
-    document.querySelectorAll(randomAnimationSelectors).forEach((item) => {
-      const animationProperties = getRandomAnimationDirection();
-      gsap.from(
-        item,
-        getAnimationProperties({
-          ...animationProperties,
-          scrollTrigger: getScrollTriggerConfig(
-            item,
-            "top 85%",
-            "center center"
-          ),
-        })
-      );
+  function clearAnimations() {
+    // Reset timeline
+    
+    // List of selectors for elements you want to clear GSAP styles from
+    const elementsToClear = [
+        '.news_grid .news_item_wrapper', 
+        '.team_members-wrapper .team_member_item', 
+        '[random-animation]'
+    ];
+    
+    // Loop through the selectors and clear GSAP styles
+    elementsToClear.forEach(selector => {
+        gsap.set(selector, { clearProps: "all" });
     });
-  }
-  
+}
+
+let tl = gsap.timeline();  // Create a global timeline
+
+function animateTabItems() {
+    const randomAnimationSelectors = '.news_grid .news_item_wrapper, .team_members-wrapper .team_member_item, [random-animation]';
+    if (elementsExist(randomAnimationSelectors)) {
+      document.querySelectorAll(randomAnimationSelectors).forEach((item) => {
+        const animationProperties = getRandomAnimationDirection();
+        tl.from(
+          item,
+          getAnimationProperties({
+            ...animationProperties,
+            scrollTrigger: getScrollTriggerConfig(
+              item,
+              "top 85%",
+              "center center"
+            ),
+          })
+        );
+      });
+    }
+}
+
+// Using event delegation
+function attachTabListeners() {
+  const tabLinks = document.querySelectorAll('.tab-link');
+  tabLinks.forEach(link => {
+      link.addEventListener('click', function() {
+          clearAnimations();
+          // We're giving a slight delay to ensure that Webflow has switched the tab before we reinitialize the animations.
+          console.log("Tab item clicked and animations reset!");
+      });
+  });
+}
+
+// Call the function to attach the listeners
+attachTabListeners();
+
+animateTabItems();
 // Button and Form Input Animations
 if (elementsExist('.button')) {
   document.querySelectorAll('.button').forEach((element) => {
@@ -218,18 +241,6 @@ if (elementsExist('.form_input_wrap')) {
   });
 }
 
-
-  // Page Wrapper Smooth Scrolling
-  const $pageWrapper = $(".page-wrapper");
-  if (!$pageWrapper.hasClass("ignore-smooth")) {
-    ScrollSmoother.create({
-      content: ".page-wrapper",
-      smooth: 2,
-      effects: true,
-      smoothTouch: 0.1,
-      normalizeScroll: true
-    });
-  }
 }
 
 // Invoke initialization
