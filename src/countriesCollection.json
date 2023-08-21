@@ -1,0 +1,75 @@
+{
+  "type": "CountriesCollection",
+  "countries": [
+      {
+          "text": "Bahrain",
+          "isoCode" : "BH",
+          "size": 1.0,
+          "country": "Bahrain",
+          "city": "Manama",
+          "lat": "26.2235",
+          "lng": "50.5859",
+          "color": "#FF6F61"
+      },
+      {
+          "text": "UAE",
+          "isoCode" : "AE",
+          "size": 1.0,
+          "country": "UAE",
+          "city": "Abu Dhabi",
+          "lat": "24.4539",
+          "lng": "54.3773",
+          "color": "#FECB00"
+      },
+      {
+          "text": "United States",
+          "isoCode" : "US",
+          "size": 1.0,
+          "country": "United States",
+          "city": "Washington, D.C.",
+          "lat": "38.9072",
+          "lng": "-77.0369",
+          "color": "#2455B7"
+      },
+      {
+          "text": "Israel",
+          "isoCode" : "IL",
+          "size": 1.0,
+          "country": "Israel",
+          "city": "Jerusalem",
+          "lat": "31.7683",
+          "lng": "35.2137",
+          "color": "#00A859"
+      },
+      {
+          "text": "Europe",
+          "isoCode" : "150",
+          "size": 1.0,
+          "country": "Europe",
+          "city": "Paris",
+          "lat": "48.8566",
+          "lng": "2.3522",
+          "color": "#5D76A9"
+      },
+      {
+          "text": "Morocco",
+          "isoCode" : "MA",
+          "size": 1.0,
+          "country": "Morocco",
+          "city": "Rabat",
+          "lat": "34.0208",
+          "lng": "-6.8417",
+          "color": "#FFD700"
+      },
+      {
+          "text": "Pakistan",
+          "isoCode" : "PK",
+          "size": 1.0,
+          "country": "Pakistan",
+          "city": "Islamabad",
+          "lat": "33.6844",
+          "lng": "73.0479",
+          "color": "#006A4E"
+      }
+  ]
+}

@@ -1,32 +1,28 @@
 
 import "external-svg-loader";
-import './style.scss';
+import "./styles/style.scss"
 import { checkLibrariesAvailability } from './config.js';
-import { initializeAnimations } from './animations.js';
+import { initializeAnimations } from './animations/initializeAnimations.js';
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { SplitText } from "gsap/SplitText";
   
 window.gsap = gsap;
 window.ScrollTrigger = ScrollTrigger;
 window.SplitText = SplitText;
-window.ScrollSmoother = ScrollSmoother;
 // Listener
 document.addEventListener("DOMContentLoaded", function() {
-  gsap.registerPlugin(SplitText, ScrollTrigger, ScrollSmoother);
+  gsap.registerPlugin(SplitText, ScrollTrigger);
 
   
     if (checkLibrariesAvailability()) {
-        initializeAnimations();
+        initializeAnimations(gsap, ScrollTrigger);
     }
 
     const bodyData = document.body.getAttribute('data-requires') || "";
-
     const pageRequiresHoverEffects = bodyData.includes("hover-effects");
     const pageRequiresSVG = bodyData.includes("svg");
     const pageRequiresTeamBio = bodyData.includes("team-bio");
-    const pageRequiresWorldMap = bodyData.includes("world-map");
     const pageRequiresGlobe = bodyData.includes("globe");
 
     // For pages requiring Splide Gallery and Our Work initializers
@@ -64,13 +60,6 @@ document.addEventListener("DOMContentLoaded", function() {
     if (pageRequiresTeamBio) {
         import('./teamBioHandler.js').then(({ handleTeamBioPopup }) => {
             handleTeamBioPopup();
-        });
-    }
-
-    if (pageRequiresWorldMap) {
-        import('./worldMap.js').then(({ renderGitHubGlobe, renderWorldMap }) => {
-            renderGitHubGlobe();
-            renderWorldMap();
         });
     }
 
