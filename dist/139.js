@@ -1,1 +1,1 @@
-(self.webpackChunkoptimized_js_project=self.webpackChunkoptimized_js_project||[]).push([[139],{139:()=>{}}]);
+"use strict";(self.webpackChunkoptimized_js_project=self.webpackChunkoptimized_js_project||[]).push([[139],{139:(e,t,i)=>{i.r(t),i.d(t,{initializeSectionAnimations:()=>a});var n=i(608);function a(e){(0,n.Sl)("[animate-section-left]")&&e.timeline().to("[animate-section-left]",(0,n.Ef)({clipPath:"inset(0 0% 0 0)",delay:0})).to("[animate-section-left]",(0,n.Ef)({opacity:1,delay:0}))}}}]);

@@ -9,21 +9,21 @@
   },
   "dependencies": {
     "@splidejs/splide": "^4.1.4",
+    "compression-webpack-plugin": "^10.0.0",
     "css-minimizer-webpack-plugin": "^5.0.1",
-    "d3": "^7.8.5",
     "external-svg-loader": "^1.6.9",
-    "globe.gl": "^2.29.2",
     "gsap": "npm:@gsap/shockingly@^3.12.2",
+    "postcss-loader": "^7.3.3",
     "three": "^0.155.0",
-    "three-globe": "^2.28.0",
-    "three-glow-mesh": "^0.1.2",
-    "topojson-client": "^3.1.0"
+    "three-globe": "^2.28.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
     "@babel/preset-env": "^7.0.0",
     "babel-core": "^7.0.0-bridge.0",
     "babel-loader": "^8.0.0",
+    "brotli-webpack-plugin": "^1.1.0",
+    "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^5.2.7",
     "hard-source-webpack-plugin": "^0.13.1",
     "mini-css-extract-plugin": "^1.0.0",
@@ -41,3 +41,4 @@
     "webpack-unused-plugin": "^0.0.0"
   }
 }
+

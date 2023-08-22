@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkoptimized_js_project=self.webpackChunkoptimized_js_project||[]).push([[544],{9544:(t,e,i)=>{function r(){var t=$("#navbar");t.length&&ScrollTrigger.create({trigger:t[0],start:"top top",endTrigger:"body",end:"bottom top",pin:!0,pinSpacing:!1})}i.r(e),i.d(e,{initializeNavbarAnimation:()=>r})}}]);

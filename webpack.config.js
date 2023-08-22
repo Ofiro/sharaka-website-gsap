@@ -2,16 +2,16 @@ const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-// Import BundleAnalyzerPlugin, keep it for future use but don't use it for every production build.
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer"); 
+const CompressionPlugin = require('compression-webpack-plugin');
+const BrotliPlugin = require('brotli-webpack-plugin');
 
 module.exports = {
   mode: "production",
   entry: "./src/init.js",
   output: {
-    filename: "[name].js",
+    filename: "[name].[contenthash].js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "https://sharaka.makevision.agency/", // Updated publicPath
+    publicPath: "https://sharaka.makevision.agency/",
   },
   module: {
     rules: [
@@ -27,32 +27,44 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader", "sass-loader"],
       },
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
     ],
   },
   optimization: {
     minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
     splitChunks: {
+      chunks: 'all',
+      maxInitialRequests: Infinity,
+      minSize: 0,
       cacheGroups: {
         vendor: {
-          test: /[\\/]node_modules[\\/](gsap|splide)[\\/]/,
-          name: "vendor",
-          chunks: "all",
+          test: /[\\/]node_modules[\\/]/,
+          name(module) {
+            const packageName = module.context.match(/[\\/]node_modules[\\/](.*?)([\\/]|$)/)[1];
+            return `npm.${packageName.replace('@', '')}`;
+          },
         },
       },
     },
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: "[name].css",
-      chunkFilename: "[id].css",
+      filename: "[name].[contenthash].css",
+      chunkFilename: "[id].[contenthash].css",
     }),
-    // Commenting out BundleAnalyzerPlugin. Uncomment when you need insights into your bundle.
-    // new BundleAnalyzerPlugin(), 
+    new CompressionPlugin({
+      test: /\.js(\?.*)?$/i,
+    }),
+    new BrotliPlugin({
+      asset: '[path].br[query]',
+      test: /\.(js|css|html|svg)$/,
+      threshold: 10240,
+      minRatio: 0.8
+    }),
   ],
 };

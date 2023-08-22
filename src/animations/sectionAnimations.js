@@ -10,14 +10,14 @@ export function initializeSectionAnimations(gsap) {
         "[animate-section-left]",
         getAnimationProperties({
           clipPath: "inset(0 0% 0 0)",
-          delay: 0.3,
+          delay: 0,
         })
       )
       .to(
         "[animate-section-left]",
         getAnimationProperties({
           opacity: 1,
-          delay: 0.1,
+          delay: 0,
         })
       );
   }

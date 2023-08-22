@@ -70,6 +70,16 @@ function initializeAnimations(gsap, ScrollTrigger) {
       initializeFormAnimations(gsap, ScrollTrigger);
     });
   }
+ if (elementsExist('#gallery-splide')) {
+    import('../splide/gallerySplide.js').then(({ initializeGallery }) => {
+        initializeGallery();
+        });
+ }
+ if (elementsExist('#splide-our-work')) {
+    import('../splide/ourWorkSplide.js').then(({ initializeOurWork }) => {
+        initializeOurWork();
+        });
+ }
 }
 
 export { initializeAnimations };

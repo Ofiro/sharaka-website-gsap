@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkoptimized_js_project=self.webpackChunkoptimized_js_project||[]).push([[942],{942:(e,t,c)=>{function r(){document.querySelectorAll(".svg-code").forEach((function(e){var t=e.getAttribute("data-svg");e.innerHTML=t}))}c.r(t),c.d(t,{createSVGElements:()=>r})}}]);

@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkoptimized_js_project=self.webpackChunkoptimized_js_project||[]).push([[313],{8710:(t,e,n)=>{n.d(e,{Z:()=>r});var r=function(t){return"function"==typeof t?t:"string"==typeof t?function(e){return e[t]}:function(e){return t}}}}]);
