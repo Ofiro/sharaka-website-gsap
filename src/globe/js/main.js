@@ -68,7 +68,5 @@ export function renderGlobe(worldMapContainer) {
 
   // Start animating the scene
   animateScene(camera, scene, controls, renderer);
-
-  // Set up country hover interactions
-  setupCountryHover(controls, Vector3, countriesCollection, Globe, camera, worldMapContainer);
+  console.log("Rendering globe...");
 }
