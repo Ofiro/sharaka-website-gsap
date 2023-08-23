@@ -16,6 +16,7 @@ window.SplitText = SplitText;
  * Initialize animations, plugins, and resource loading when the DOM content is loaded.
  */
 document.addEventListener("DOMContentLoaded", function() {
+  console.log("DOM content loaded");
   // Display Makevision banner
   displayMakevisionBanner();
 
